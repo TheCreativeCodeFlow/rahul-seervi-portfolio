@@ -83,9 +83,10 @@ export default function Contact() {
 
       // EmailJS configuration
       const serviceID = "service_axepp2l" // Replace with your EmailJS service ID
-      const templateID = "template_iscnkrj" // Replace with your EmailJS template ID
+      const templateID = "template_iscnkrj" // Main template (email to you)
+      const autoReplyTemplateID = "template_auto_reply" // Auto-reply template (email to user)
 
-      // Template parameters
+      // Template parameters for main email (to you)
       const templateParams = {
         from_name: formData.name,
         from_email: formData.email,
@@ -95,15 +96,33 @@ export default function Contact() {
         timestamp: new Date().toLocaleString(),
       }
 
-      console.log("📧 Sending email via EmailJS...")
+      // Template parameters for auto-reply email (to user)
+      const autoReplyParams = {
+        to_name: formData.name,
+        to_email: formData.email,
+        from_name: "Rahul Seervi",
+        from_email: "seervirahul2004@gmail.com",
+        user_message: formData.message,
+        timestamp: new Date().toLocaleString(),
+        portfolio_url: "https://rahulseerviportfolio.vercel.app",
+        linkedin_url: "https://www.linkedin.com/in/rahul-seervi-a14440289/",
+        github_url: "https://github.com/TheCreativeCodeFlow",
+      }
 
-      // Send email using EmailJS
-      const response = await window.emailjs.send(serviceID, templateID, templateParams)
+      console.log("📧 Sending emails via EmailJS...")
 
-      console.log("✅ Email sent successfully:", response)
+      // Send main email to you
+      console.log("📨 Sending main email to portfolio owner...")
+      const mainResponse = await window.emailjs.send(serviceID, templateID, templateParams)
+      console.log("✅ Main email sent successfully:", mainResponse)
+
+      // Send auto-reply email to user
+      console.log("📨 Sending auto-reply email to user...")
+      const autoReplyResponse = await window.emailjs.send(serviceID, autoReplyTemplateID, autoReplyParams)
+      console.log("✅ Auto-reply email sent successfully:", autoReplyResponse)
 
       setSubmitStatus("success")
-      setSuccessMessage("🎉 Message sent successfully! I'll get back to you within 24 hours.")
+      setSuccessMessage("🎉 Message sent successfully! Check your email for a confirmation. I'll get back to you within 24 hours.")
       setFormData({ name: "", email: "", message: "" })
 
       // Auto-hide success message after 15 seconds
@@ -363,7 +382,8 @@ export default function Contact() {
                       <CheckCircle className="w-5 h-5 mr-3 flex-shrink-0 mt-0.5" />
                       <div className="flex-1">
                         <p className="font-medium text-sm">{successMessage}</p>
-                        <p className="text-xs text-green-300 mt-1">✅ Email sent via EmailJS!</p>
+                        <p className="text-xs text-green-300 mt-1">✅ Main email sent to Rahul</p>
+                        <p className="text-xs text-green-300">📧 Confirmation email sent to you</p>
                       </div>
                     </div>
                   </div>
