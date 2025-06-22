@@ -1,0 +1,10 @@
+<svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Simple RS Logo -->
+  <rect width="100" height="100" fill="transparent"/>
+  
+  <!-- Letter R -->
+  <text x="15" y="70" font-family="Arial, sans-serif" font-size="60" font-weight="bold" fill="#2E86AB">R</text>
+  
+  <!-- Letter S -->
+  <text x="55" y="70" font-family="Arial, sans-serif" font-size="60" font-weight="bold" fill="#F4A261">S</text>
+</svg>
