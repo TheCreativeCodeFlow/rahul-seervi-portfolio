@@ -84,7 +84,7 @@ export default function Contact() {
       // EmailJS configuration
       const serviceID = "service_axepp2l" // Replace with your EmailJS service ID
       const templateID = "template_iscnkrj" // Main template (email to you)
-      const autoReplyTemplateID = "template_auto_reply" // Auto-reply template (email to user)
+      const autoReplyTemplateID = "template_lgc0wbf" // Auto-reply template (email to user)
 
       // Template parameters for main email (to you)
       const templateParams = {
