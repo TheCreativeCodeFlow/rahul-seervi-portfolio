@@ -5,6 +5,13 @@
   "description": "Personal portfolio website of Rahul Seervi - B.Tech CSE Student specializing in Big Data Analytics",
   "author": "Rahul Seervi <seervirahul2004@gmail.com>",
   "homepage": "https://github.com/TheCreativeCodeFlow/rahul-seervi-portfolio",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TheCreativeCodeFlow/rahul-seervi-portfolio.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TheCreativeCodeFlow/rahul-seervi-portfolio/issues"
+  },
   "scripts": {
     "build": "next build",
     "dev": "next dev",
