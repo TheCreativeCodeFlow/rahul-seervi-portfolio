@@ -13,10 +13,10 @@ export default function Projects() {
       title: "UNO Game",
       description:
         "A fully functional UNO card game built with Java, featuring multiplayer support, game logic implementation, and an intuitive user interface.",
-      image: "/placeholder.svg?height=300&width=400",
+      image: "/images/uno-game-thumbnail.png",
       technologies: ["Java", "Swing", "OOP", "Game Logic"],
-      liveDemo: "#",
-      sourceCode: "#",
+      liveDemo: "https://uno-game-app-3w67.vercel.app/",
+      sourceCode: "https://github.com/TheCreativeCodeFlow/Uno-Game-App",
       featured: true,
       category: "game",
       date: "2024",
