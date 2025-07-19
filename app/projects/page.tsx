@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Github, Calendar, Tag, Filter } from "lucide-react"
+import { Github, Calendar, Tag, Filter, ExternalLink } from "lucide-react"
 import LoadingScreen from "@/components/LoadingScreens"
 
 export default function Projects() {
@@ -184,10 +184,19 @@ export default function Projects() {
                       </div>
 
                       {/* Action Buttons */}
-                      <div className="flex justify-start">
+                      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                        <a
+                          href={project.liveDemo}
+                          className="btn-primary flex items-center justify-center gap-2"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <ExternalLink className="w-4 h-4" />
+                          Demo
+                        </a>
                         <a
                           href={project.sourceCode}
-                          className="btn-primary flex items-center justify-center gap-2"
+                          className="btn-secondary flex items-center justify-center gap-2"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
@@ -217,7 +226,15 @@ export default function Projects() {
                         <Calendar className="w-4 h-4 text-primary-orange mr-2" />
                         <span className="text-sm text-gray-400">{project.date}</span>
                       </div>
-                      <div className="flex justify-center">
+                      <div className="flex justify-center space-x-2">
+                        <a
+                          href={project.liveDemo}
+                          className="p-2 rounded-lg bg-gray-800 hover:bg-primary-orange hover:text-white transition-colors duration-300"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <ExternalLink className="w-4 h-4" />
+                        </a>
                         <a
                           href={project.sourceCode}
                           className="p-2 rounded-lg bg-gray-800 hover:bg-primary-blue hover:text-white transition-colors duration-300"
