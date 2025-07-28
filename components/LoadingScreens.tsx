@@ -23,7 +23,7 @@ import {
 
 interface LoadingScreenProps {
   onComplete: () => void
-  type?: "home" | "about" | "skills" | "projects" | "contact" | "certificates"
+  type?: "home" | "about" | "skills" | "projects" | "contact"
 }
 
 const LoadingScreen = ({ onComplete, type = "home" }: LoadingScreenProps) => {
@@ -163,26 +163,6 @@ const LoadingScreen = ({ onComplete, type = "home" }: LoadingScreenProps) => {
         { icon: <Zap className="w-4 h-4" />, delay: "0.9s", position: { x: 75, y: 70 } },
       ],
       specialEffect: "pulse-waves",
-    },
-    certificates: {
-      title: "Loading Certificates",
-      subtitle: "Showcasing achievements...",
-      icon: <Star className="w-8 h-8" />,
-      color: "from-purple-500 to-pink-500",
-      bgPattern: "from-purple-500/10 via-pink-500/5 to-indigo-500/10",
-      messages: [
-        "Loading certifications...",
-        "Verifying credentials...",
-        "Preparing showcase...",
-        "Achievements ready to display!",
-      ],
-      particles: [
-        { icon: <Star className="w-4 h-4" />, delay: "0s", position: { x: 25, y: 20 } },
-        { icon: <Sparkles className="w-4 h-4" />, delay: "0.3s", position: { x: 75, y: 25 } },
-        { icon: <User className="w-4 h-4" />, delay: "0.6s", position: { x: 20, y: 65 } },
-        { icon: <Code className="w-4 h-4" />, delay: "0.9s", position: { x: 80, y: 70 } },
-      ],
-      specialEffect: "floating-bubbles",
     },
   }
 

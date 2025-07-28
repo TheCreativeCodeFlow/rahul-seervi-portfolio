@@ -187,12 +187,11 @@ export default function Home() {
       <section className="section-padding bg-gray-900/30">
         <div className="container-custom">
           <h2 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12">Explore My Work</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {[
               { title: "About Me", href: "/about", description: "Learn about my journey" },
               { title: "Skills", href: "/skills", description: "Technical expertise" },
               { title: "Projects", href: "/projects", description: "Featured work" },
-              { title: "Certificates", href: "/certificates", description: "My achievements" },
               { title: "Contact", href: "/contact", description: "Get in touch" },
             ].map((item, index) => (
               <Link
