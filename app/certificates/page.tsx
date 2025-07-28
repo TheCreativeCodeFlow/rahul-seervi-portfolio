@@ -1,7 +1,7 @@
 "use client"
 
-import { useState, useRef } from "react"
-import { Upload, Award, Plus, Trash2, Filter } from "lucide-react"
+import { useState, useEffect } from "react"
+import { Award, Filter } from "lucide-react"
 import LoadingScreen from "@/components/LoadingScreens"
 import Certificates from "@/components/Certificates"
 import CertificateModal from "@/components/CertificateModal"
@@ -20,13 +20,13 @@ interface Certificate {
 
 export default function Certificates() {
   const [loading, setLoading] = useState(true)
-  const [certificates, setCertificates] = useState<Certificate[]>([
+  const [certificates] = useState<Certificate[]>([
     {
       id: "1",
       title: "Full Stack Web Development Certification",
       issuer: "FreeCodeCamp",
       date: "2024",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/placeholder.svg?height=400&width=600&text=Full+Stack+Certificate",
       description: "Comprehensive course covering HTML, CSS, JavaScript, React, Node.js, and MongoDB. Completed 300+ hours of coursework including responsive web design, algorithms and data structures, front-end libraries, and back-end development.",
       category: "web",
       featured: true,
@@ -37,7 +37,7 @@ export default function Certificates() {
       title: "Machine Learning Specialization",
       issuer: "Coursera - Stanford University",
       date: "2024",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/placeholder.svg?height=400&width=600&text=Machine+Learning+Certificate",
       description: "Advanced machine learning algorithms and practical implementation using Python, TensorFlow, and scikit-learn. Covered supervised learning, unsupervised learning, and neural networks.",
       category: "ai",
       featured: true,
@@ -48,7 +48,7 @@ export default function Certificates() {
       title: "AWS Cloud Practitioner",
       issuer: "Amazon Web Services",
       date: "2023",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/placeholder.svg?height=400&width=600&text=AWS+Cloud+Certificate",
       description: "Cloud computing fundamentals and AWS services including EC2, S3, RDS, and Lambda. Understanding of cloud architecture and security best practices.",
       category: "cloud",
       credentialUrl: "https://aws.amazon.com/verification/example"
@@ -58,7 +58,7 @@ export default function Certificates() {
       title: "Google Data Analytics Professional Certificate",
       issuer: "Google via Coursera",
       date: "2023",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/placeholder.svg?height=400&width=600&text=Google+Data+Analytics",
       description: "Comprehensive data analytics program covering data cleaning, analysis, and visualization using SQL, R, and Tableau.",
       category: "data",
       featured: false
@@ -68,7 +68,7 @@ export default function Certificates() {
       title: "React Developer Certification",
       issuer: "Meta via Coursera",
       date: "2024",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/placeholder.svg?height=400&width=600&text=React+Developer+Certificate",
       description: "Advanced React development including hooks, context, state management, and modern React patterns.",
       category: "web",
       featured: false
@@ -76,8 +76,6 @@ export default function Certificates() {
   ])
   const [selectedCertificate, setSelectedCertificate] = useState<Certificate | null>(null)
   const [filter, setFilter] = useState("all")
-  const [isUploading, setIsUploading] = useState(false)
-  const fileInputRef = useRef<HTMLInputElement>(null)
 
   const categories = [
     { id: "all", name: "All Certificates", color: "from-purple-500 to-pink-500" },
@@ -87,38 +85,20 @@ export default function Certificates() {
     { id: "data", name: "Data Science", color: "from-indigo-500 to-purple-500" }
   ]
 
-  const filteredCertificates = filter === "all" 
-    ? certificates 
+  const filteredCertificates = filter === "all"
+    ? certificates
     : certificates.filter(cert => cert.category === filter)
 
-  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0]
-    if (file) {
-      setIsUploading(true)
-      // Simulate upload process
-      setTimeout(() => {
-        const reader = new FileReader()
-        reader.onload = (e) => {
-          const newCertificate: Certificate = {
-            id: Date.now().toString(),
-            title: "New Certificate",
-            issuer: "Institution Name",
-            date: new Date().getFullYear().toString(),
-            image: e.target?.result as string,
-            description: "Add description here",
-            category: "web"
-          }
-          setCertificates(prev => [...prev, newCertificate])
-          setIsUploading(false)
-        }
-        reader.readAsDataURL(file)
-      }, 2000)
-    }
-  }
+  // Auto-complete loading after component mounts
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false)
+    }, 2000) // 2 second loading time
 
-  const deleteCertificate = (id: string) => {
-    setCertificates(prev => prev.filter(cert => cert.id !== id))
-  }
+    return () => clearTimeout(timer)
+  }, [])
+
+
 
   // Loading screen
   if (loading) {
@@ -143,40 +123,9 @@ export default function Certificates() {
               My <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Certificates</span>
             </h1>
             
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto mb-8">
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto mb-12">
               A collection of my professional certifications and achievements that showcase my continuous learning journey and expertise in various technologies.
             </p>
-
-            {/* Upload Button */}
-            <div className="flex justify-center mb-8">
-              <button
-                onClick={() => fileInputRef.current?.click()}
-                disabled={isUploading}
-                className="btn-primary flex items-center gap-2 relative overflow-hidden group"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="relative z-10 flex items-center gap-2">
-                  {isUploading ? (
-                    <>
-                      <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                      Uploading...
-                    </>
-                  ) : (
-                    <>
-                      <Plus className="w-4 h-4" />
-                      Add Certificate
-                    </>
-                  )}
-                </div>
-              </button>
-              <input
-                ref={fileInputRef}
-                type="file"
-                accept="image/*"
-                onChange={handleFileUpload}
-                className="hidden"
-              />
-            </div>
           </div>
         </div>
       </section>
