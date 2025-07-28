@@ -23,12 +23,17 @@ import {
 
 interface LoadingScreenProps {
   onComplete: () => void
-  type: "home" | "about" | "skills" | "projects" | "contact"
+  type?: "home" | "about" | "skills" | "projects" | "contact" | "certificates"
 }
 
-const LoadingScreen = ({ onComplete, type }: LoadingScreenProps) => {
+const LoadingScreen = ({ onComplete, type = "home" }: LoadingScreenProps) => {
   const [progress, setProgress] = useState(0)
   const [currentMessage, setCurrentMessage] = useState(0)
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -159,100 +164,140 @@ const LoadingScreen = ({ onComplete, type }: LoadingScreenProps) => {
       ],
       specialEffect: "pulse-waves",
     },
+    certificates: {
+      title: "Loading Certificates",
+      subtitle: "Showcasing achievements...",
+      icon: <Star className="w-8 h-8" />,
+      color: "from-purple-500 to-pink-500",
+      bgPattern: "from-purple-500/10 via-pink-500/5 to-indigo-500/10",
+      messages: [
+        "Loading certifications...",
+        "Verifying credentials...",
+        "Preparing showcase...",
+        "Achievements ready to display!",
+      ],
+      particles: [
+        { icon: <Star className="w-4 h-4" />, delay: "0s", position: { x: 25, y: 20 } },
+        { icon: <Sparkles className="w-4 h-4" />, delay: "0.3s", position: { x: 75, y: 25 } },
+        { icon: <User className="w-4 h-4" />, delay: "0.6s", position: { x: 20, y: 65 } },
+        { icon: <Code className="w-4 h-4" />, delay: "0.9s", position: { x: 80, y: 70 } },
+      ],
+      specialEffect: "floating-bubbles",
+    },
   }
 
   const config = loadingConfigs[type]
 
   // Special Effects Components
-  const MatrixRain = () => (
-    <div className="absolute inset-0 overflow-hidden opacity-20">
-      {[...Array(20)].map((_, i) => (
-        <div
-          key={i}
-          className="absolute text-green-400 text-xs font-mono animate-pulse"
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            animationDelay: `${Math.random() * 3}s`,
-            animationDuration: `${2 + Math.random() * 2}s`,
-          }}
-        >
-          {Math.random() > 0.5 ? "1" : "0"}
-        </div>
-      ))}
-    </div>
-  )
+  const MatrixRain = () => {
+    if (!isClient) return null
 
-  const FloatingBubbles = () => (
-    <div className="absolute inset-0 overflow-hidden">
-      {[...Array(15)].map((_, i) => (
-        <div
-          key={i}
-          className="absolute w-2 h-2 bg-blue-400/30 rounded-full animate-bounce"
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            animationDelay: `${Math.random() * 2}s`,
-            animationDuration: `${3 + Math.random() * 2}s`,
-          }}
-        />
-      ))}
-    </div>
-  )
+    return (
+      <div className="absolute inset-0 overflow-hidden opacity-20">
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute text-green-400 text-xs font-mono animate-pulse"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 3}s`,
+              animationDuration: `${2 + Math.random() * 2}s`,
+            }}
+          >
+            {Math.random() > 0.5 ? "1" : "0"}
+          </div>
+        ))}
+      </div>
+    )
+  }
 
-  const SkillBars = () => (
-    <div className="absolute inset-0 overflow-hidden opacity-30">
-      {[...Array(8)].map((_, i) => (
-        <div
-          key={i}
-          className="absolute h-1 bg-gradient-to-r from-green-400 to-emerald-500 rounded animate-pulse"
-          style={{
-            left: `${10 + Math.random() * 80}%`,
-            top: `${20 + i * 8}%`,
-            width: `${30 + Math.random() * 40}%`,
-            animationDelay: `${i * 0.2}s`,
-          }}
-        />
-      ))}
-    </div>
-  )
+  const FloatingBubbles = () => {
+    if (!isClient) return null
 
-  const CodeRain = () => (
-    <div className="absolute inset-0 overflow-hidden opacity-20">
-      {["<div>", "</div>", "function()", "const", "return", "import", "export"].map((code, i) => (
-        <div
-          key={i}
-          className="absolute text-purple-400 text-xs font-mono animate-bounce"
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            animationDelay: `${Math.random() * 2}s`,
-            animationDuration: `${2 + Math.random() * 3}s`,
-          }}
-        >
-          {code}
-        </div>
-      ))}
-    </div>
-  )
+    return (
+      <div className="absolute inset-0 overflow-hidden">
+        {[...Array(15)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-2 h-2 bg-blue-400/30 rounded-full animate-bounce"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 2}s`,
+              animationDuration: `${3 + Math.random() * 2}s`,
+            }}
+          />
+        ))}
+      </div>
+    )
+  }
 
-  const PulseWaves = () => (
-    <div className="absolute inset-0 overflow-hidden">
-      {[...Array(8)].map((_, i) => (
-        <div
-          key={i}
-          className="absolute w-1 h-8 bg-orange-400/20 animate-pulse"
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            animationDelay: `${i * 0.3}s`,
-            animationDuration: "2s",
-            transform: `rotate(${Math.random() * 360}deg)`,
-          }}
-        />
-      ))}
-    </div>
-  )
+  const SkillBars = () => {
+    if (!isClient) return null
+
+    return (
+      <div className="absolute inset-0 overflow-hidden opacity-30">
+        {[...Array(8)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute h-1 bg-gradient-to-r from-green-400 to-emerald-500 rounded animate-pulse"
+            style={{
+              left: `${10 + Math.random() * 80}%`,
+              top: `${20 + i * 8}%`,
+              width: `${30 + Math.random() * 40}%`,
+              animationDelay: `${i * 0.2}s`,
+            }}
+          />
+        ))}
+      </div>
+    )
+  }
+
+  const CodeRain = () => {
+    if (!isClient) return null
+
+    return (
+      <div className="absolute inset-0 overflow-hidden opacity-20">
+        {["<div>", "</div>", "function()", "const", "return", "import", "export"].map((code, i) => (
+          <div
+            key={i}
+            className="absolute text-purple-400 text-xs font-mono animate-bounce"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 2}s`,
+              animationDuration: `${2 + Math.random() * 3}s`,
+            }}
+          >
+            {code}
+          </div>
+        ))}
+      </div>
+    )
+  }
+
+  const PulseWaves = () => {
+    if (!isClient) return null
+
+    return (
+      <div className="absolute inset-0 overflow-hidden">
+        {[...Array(8)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-8 bg-orange-400/20 animate-pulse"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${i * 0.3}s`,
+              animationDuration: "2s",
+              transform: `rotate(${Math.random() * 360}deg)`,
+            }}
+          />
+        ))}
+      </div>
+    )
+  }
 
   const renderSpecialEffect = () => {
     switch (config.specialEffect) {

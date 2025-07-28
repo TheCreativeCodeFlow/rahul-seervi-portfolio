@@ -122,7 +122,7 @@ export default function Certificates() {
 
   // Loading screen
   if (loading) {
-    return <LoadingScreen onComplete={() => setLoading(false)} />
+    return <LoadingScreen onComplete={() => setLoading(false)} type="certificates" />
   }
 
   return (
