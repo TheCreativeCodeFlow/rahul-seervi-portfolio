@@ -1,8 +1,7 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { Award, Filter } from "lucide-react"
-import LoadingScreen from "@/components/LoadingScreens"
 import Certificates from "@/components/Certificates"
 import CertificateModal from "@/components/CertificateModal"
 
@@ -19,7 +18,6 @@ interface Certificate {
 }
 
 export default function Certificates() {
-  const [loading, setLoading] = useState(true)
   const [certificates] = useState<Certificate[]>([
     {
       id: "1",
@@ -89,21 +87,9 @@ export default function Certificates() {
     ? certificates
     : certificates.filter(cert => cert.category === filter)
 
-  // Auto-complete loading after component mounts
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false)
-    }, 2000) // 2 second loading time
-
-    return () => clearTimeout(timer)
-  }, [])
 
 
 
-  // Loading screen
-  if (loading) {
-    return <LoadingScreen onComplete={() => setLoading(false)} type="certificates" />
-  }
 
   return (
     <div className="min-h-screen bg-black text-white page-transition">
