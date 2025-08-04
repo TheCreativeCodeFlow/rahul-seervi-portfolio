@@ -22,15 +22,15 @@ export default function Projects() {
       date: "2024",
     },
     {
-      title: "AI Chatbot with JSON Training",
+      title: "Mentor's Mark - NGO Platform",
       description:
-        "An intelligent chatbot system that learns from JSON-based training data, providing contextual responses and natural language processing capabilities.",
-      image: "/placeholder.svg?height=300&width=400",
-      technologies: ["JavaScript", "JSON", "NLP", "AI/ML"],
-      liveDemo: "#",
-      sourceCode: "#",
+        "A comprehensive NGO platform designed to connect mentors with students, facilitating educational guidance and career development. Features user registration, mentor-student matching, resource sharing, and progress tracking to empower underprivileged communities through quality mentorship.",
+      image: "/images/mentors-mark-thumbnail.png",
+      technologies: ["React", "Next.js", "Node.js", "MongoDB", "Tailwind CSS"],
+      liveDemo: "https://mentor-s-mark-qvn3.vercel.app/",
+      sourceCode: "https://github.com/TheCreativeCodeFlow/Mentor-s-Mark",
       featured: true,
-      category: "ai",
+      category: "web",
       date: "2024",
     },
     {
